@@ -1,0 +1,9 @@
+{
+  "name": "kendrashya-linkedin-autoapply",
+  "version": "2.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/generate-profile.js",
+    "check": "node --check background.js && node --check content.js && node --check controlPanel.js && node --check popup.js && node --check questions.js"
+  }
+}

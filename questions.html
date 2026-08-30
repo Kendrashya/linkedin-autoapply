@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kendrashya Diwakar AutoApply - Settings</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+        min-height: 100vh;
+        padding: 24px;
+        color: #222;
+      }
+      .container {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.6em;
+        color: #0073b1;
+        margin-bottom: 6px;
+      }
+      .subtitle {
+        color: #555;
+        font-size: 0.95em;
+        margin-bottom: 24px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
+      .card h2 {
+        font-size: 1.15em;
+        color: #0073b1;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e3e7ed;
+      }
+      .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 14px;
+        align-items: center;
+      }
+      .form-row label {
+        min-width: 140px;
+        font-weight: 500;
+        font-size: 0.9em;
+        color: #333;
+      }
+      .form-row input,
+      .form-row textarea,
+      .form-row select {
+        flex: 1;
+        min-width: 200px;
+        padding: 10px 12px;
+        border: 1.5px solid #d0d7de;
+        border-radius: 8px;
+        font-size: 0.9em;
+        transition: border-color 0.2s;
+        font-family: inherit;
+        background: #fafbfc;
+      }
+      .form-row input:focus,
+      .form-row textarea:focus,
+      .form-row select:focus {
+        outline: none;
+        border-color: #0073b1;
+        background: #fff;
+      }
+      .form-row textarea {
+        min-height: 70px;
+        resize: vertical;
+      }
+      .form-hint {
+        font-size: 0.8em;
+        color: #888;
+        margin-top: 2px;
+        flex-basis: 100%;
+        padding-left: 152px;
+      }
+      .question-item {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 12px;
+        border: 1px solid #e8ecf0;
+      }
+      .question-item .form-row {
+        margin-bottom: 10px;
+      }
+      .question-item .form-row:last-child {
+        margin-bottom: 0;
+      }
+      .question-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .question-header .q-number {
+        font-weight: 600;
+        color: #0073b1;
+        font-size: 0.9em;
+      }
+      .remove-btn {
+        background: none;
+        border: none;
+        color: #d93a3a;
+        cursor: pointer;
+        font-size: 1.2em;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background 0.15s;
+      }
+      .remove-btn:hover {
+        background: #fde8e8;
+      }
+      .add-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 18px;
+        background: #e3e7ed;
+        color: #0073b1;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 0.9em;
+        transition: background 0.2s;
+      }
+      .add-btn:hover {
+        background: #cfd8e3;
+      }
+      .save-btn {
+        display: block;
+        width: 100%;
+        padding: 14px 0;
+        background: #0073b1;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(0, 115, 177, 0.3);
+        margin-top: 8px;
+      }
+      .save-btn:hover {
+        background: #005983;
+        box-shadow: 0 4px 12px rgba(0, 115, 177, 0.4);
+      }
+      .save-status {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 0.9em;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .save-status.show {
+        opacity: 1;
+      }
+      .save-status.success {
+        color: #1a7f37;
+      }
+      .save-status.error {
+        color: #d93a3a;
+      }
+      .nav-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: #0073b1;
+        text-decoration: none;
+        font-size: 0.9em;
+        margin-bottom: 16px;
+      }
+      .nav-back:hover {
+        text-decoration: underline;
+      }
+      .scan-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 18px;
+        background: #0073b1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 0.9em;
+        transition: background 0.2s;
+        margin-bottom: 16px;
+      }
+      .scan-btn:hover {
+        background: #005983;
+      }
+      .tag {
+        display: inline-block;
+        background: #e3e7ed;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.75em;
+        color: #555;
+        margin-right: 4px;
+        margin-bottom: 4px;
+      }
+      .detected-fields {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      @media (max-width: 600px) {
+        .form-row label {
+          min-width: 100%;
+        }
+        .form-hint {
+          padding-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a class="nav-back" href="#" id="backBtn">&larr; Back to AutoApply</a>
+      <h1>Kendrashya Diwakar AutoApply Settings</h1>
+      <p class="subtitle">
+        Set your default answers and add custom question-to-answer mappings.
+        The extension will automatically match questions in job forms to these answers.
+      </p>
+
+      <div class="card">
+        <h2>Personal Information</h2>
+        <div class="form-row">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="John Doe" />
+        </div>
+        <div class="form-row">
+          <label for="phone">Mobile Number</label>
+          <input type="tel" id="phone" placeholder="+1234567890" />
+          <div class="form-hint">Will be filled when the form asks for phone / mobile / contact number</div>
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="john@example.com" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Experience &amp; Compensation</h2>
+        <div class="form-row">
+          <label for="yearsOfExperience">Years of Experience</label>
+          <input type="text" id="yearsOfExperience" value="4" readonly />
+          <div class="form-hint">Fills "Years of Experience" fields</div>
+        </div>
+        <div class="form-row">
+          <label for="currentCtc">Current CTC (full)</label>
+          <input type="text" id="currentCtc" placeholder="1000000" />
+          <div class="form-hint">Used when the question asks for the current annual CTC.</div>
+        </div>
+        <div class="form-row">
+          <label for="currentCtcLakhs">Current CTC (in lakhs)</label>
+          <input type="text" id="currentCtcLakhs" placeholder="11" />
+          <div class="form-hint">Used when the question asks "Current CTC in lakhs" — e.g. <strong>11</strong></div>
+        </div>
+        <div class="form-row">
+          <label for="expectedCtc">Expected CTC (full)</label>
+          <input type="text" id="expectedCtc" placeholder="1500000" />
+        </div>
+        <div class="form-row">
+          <label for="expectedCtcLakhs">Expected CTC (in lakhs)</label>
+          <input type="text" id="expectedCtcLakhs" placeholder="15" />
+        </div>
+        <div class="form-row">
+          <label for="noticePeriod">Notice Period</label>
+          <input type="text" id="noticePeriod" placeholder="30 days" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Links &amp; Additional Info</h2>
+        <div class="form-row">
+          <label for="linkedinUrl">LinkedIn Profile URL</label>
+          <input type="text" id="linkedinUrl" placeholder="https://linkedin.com/in/..." />
+        </div>
+        <div class="form-row">
+          <label for="portfolioUrl">Portfolio / Website</label>
+          <input type="text" id="portfolioUrl" placeholder="https://..." />
+        </div>
+        <div class="form-row">
+          <label for="location">Current Location</label>
+          <input type="text" id="location" placeholder="San Francisco, CA" />
+        </div>
+        <div class="form-row">
+          <label for="coverLetter">Cover Letter</label>
+          <textarea id="coverLetter" placeholder="Write a brief cover letter..."></textarea>
+        </div>
+        <div class="form-row">
+          <label for="additionalInfo">Additional Info</label>
+          <textarea id="additionalInfo" placeholder="Any other information..."></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Default Preferences</h2>
+        <p style="font-size:0.85em;color:#666;margin-bottom:12px;">
+          Radio buttons will be auto-selected based on these defaults.
+          Relocation defaults to <strong>No</strong>; everything else defaults to <strong>Yes</strong>.
+        </p>
+        <div class="form-row">
+          <label for="willingToRelocate">Willing to Relocate?</label>
+          <select id="willingToRelocate">
+            <option value="No" selected>No (default)</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="authorizedToWork">Authorized to Work?</label>
+          <select id="authorizedToWork">
+            <option value="Yes" selected>Yes (default)</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="requireVisaSponsorship">Require Visa Sponsorship?</label>
+          <select id="requireVisaSponsorship">
+            <option value="No" selected>No (default)</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="willingToCommute">Willing to Commute?</label>
+          <select id="willingToCommute">
+            <option value="">-- Not specified --</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Custom Question Mappings</h2>
+        <p style="font-size:0.85em;color:#666;margin-bottom:12px;">
+          Add custom keywords and their answers. When a form question contains the keywords, the extension will fill in your answer.
+        </p>
+        <div id="questionsContainer"></div>
+        <button class="add-btn" id="addQuestionBtn">+ Add Question Mapping</button>
+      </div>
+
+      <div class="card">
+        <h2>Scan LinkedIn Form Fields</h2>
+        <p style="font-size:0.85em;color:#666;margin-bottom:12px;">
+          Go to a LinkedIn Easy Apply form, then click this button to detect fields and auto-generate question mappings.
+        </p>
+        <button class="scan-btn" id="scanFieldsBtn">Scan Current Page Fields</button>
+        <div id="detectedFields"></div>
+      </div>
+
+      <div class="card">
+        <h2>Submission Safety</h2>
+        <div class="form-row">
+          <label for="autoSubmit">Submit automatically</label>
+          <input type="checkbox" id="autoSubmit" style="flex:0;min-width:auto" />
+          <div class="form-hint">Off by default. When off, AutoApply pauses at the final review step.</div>
+        </div>
+      </div>
+
+      <button class="save-btn" id="saveBtn">Save All Settings</button>
+      <div class="save-status" id="saveStatus"></div>
+    </div>
+    <script src="profile.config.js"></script>
+    <script src="questions.js"></script>
+  </body>
+</html>
